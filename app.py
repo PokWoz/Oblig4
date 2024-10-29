@@ -23,10 +23,15 @@ def add_employee():
     return render_template('add_employee.html')
 
 
+@app.route('/delete_employee', methods=['POST'])
+def delete_employee_route():
+    name = request.form['name']
+    delete_employee(name)
+    return redirect(url_for('success'))
+
 @app.route('/success')
 def success():
-    return "Employee created successfully!"
-
+    return "Operation completed successfully!"
 
 if __name__ == '__main__':
     app.run(debug=True)
