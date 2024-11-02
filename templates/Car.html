@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Car</title>
+  </head>
+  <body>
+      <form method="post" action="/Car">
+        <label for="action">Choose an action:</label>
+        <select name="action" id="action">
+            <option value="create">Create New Car</option>
+            <option value="update">Update Existing Car</option>
+            <option value="delete">Delete Car</option>
+        </select>
+    
+        <!-- Form fields for car details, adjust visibility with JavaScript based on action -->
+        <input type="text" name="car_id" placeholder="Car ID (for update/delete)">
+        <input type="text" name="make" placeholder="Make">
+        <input type="text" name="model" placeholder="Model">
+        <input type="number" name="year" placeholder="Year">
+        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="status" placeholder="Status">
+    
+        <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
