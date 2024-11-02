@@ -7,7 +7,7 @@ password = "password"           # Replace with your Neo4j password
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
-def create_employee(name, position, age):
+def employee(name, position, age):
     with driver.session() as session:
         query = """
         CREATE (e:Employee {name: $name, position: $position, age: $age})
@@ -17,13 +17,6 @@ def create_employee(name, position, age):
         return result.single()  # Return the created node if needed
 
 
-def delete_employee(name):
-    try:
-        with driver.session() as session:
-            session.write_transaction(lambda tx: tx.run("MATCH (e:Employee {name: $name}) DELETE e", name=name))
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
 def Car(car_id, make, model, year, location, status):
     with driver.session() as session:
         query = """
@@ -31,16 +24,16 @@ def Car(car_id, make, model, year, location, status):
         RETURN e
         """
         result = session.run(query, car_id=car_id, make=make, model=model, year=year, location=location, status=status)
-        return result.single()  # Return the created node if needed
+        return result.single()
 
-def UpdateCar(car_id, make, model, year, location, status):
+def UpdateCar(car_id, make, model, year, location, status, damage):
     with driver.session() as session:
         session.run(
             """
             MATCH (c:Car {id: $car_id})
             SET c.make = $make, c.model = $model, c.year = $year, c.location = $location, c.status = $status
-            """,
-            car_id=car_id, make=make, model=model, year=year, location=location, status=status
+            , c.damage=$damage""",
+            car_id=car_id, make=make, model=model, year=year, location=location, status=status, damage=damage
         )
 
 def DeleteCar(car_id):

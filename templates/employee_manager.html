@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Management</title>
+  <title>Employee Management</title>
   <style>
-    /* Reset default margins and padding */
     * {
       margin: 0;
       padding: 0;
@@ -22,7 +21,7 @@
       color: #fff;
     }
 
-    h1 {
+    h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-align: center;
@@ -30,7 +29,7 @@
 
     .container {
       text-align: center;
-      max-width: 600px;
+      max-width: 400px;
       padding: 30px;
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.1);
@@ -43,7 +42,7 @@
       margin: 10px 0;
     }
 
-    select, input {
+    input, select {
       padding: 10px;
       border-radius: 5px;
       border: none;
@@ -68,22 +67,33 @@
 </head>
 <body>
   <div class="container">
-    <h1>Car Management</h1>
-    <form method="post" action="/Car">
+    <h2>Employee Management</h2>
+    <form action="{{ url_for('employeeRoute') }}" method="POST">
       <label for="action">Choose an action:</label>
-      <select name="action" id="action">
-        <option value="create">Create New Car</option>
-        <option value="update">Update Existing Car</option>
-        <option value="delete">Delete Car</option>
+      <select name="action" id="action" required>
+        <option value="create">Create New Employee</option>
+        <option value="update">Update Existing Employee</option>
+        <option value="delete">Delete Employee</option>
       </select>
 
-      <input type="text" name="car_id" placeholder="Car ID (required for update/delete)">
-      <input type="text" name="make" placeholder="Make (required for create)">
-      <input type="text" name="model" placeholder="Model (required for create)">
-      <input type="number" name="year" placeholder="Year (required for create)">
-      <input type="text" name="location" placeholder="Location (required for create)">
-      <input type="text" name="status" placeholder="Status (required for create)">
-      <input type="text" name="damage" placeholder="Damage (required for Update)">
+      <label for="employee_id">Employee ID (for update/delete):</label>
+      <input type="text" id="employee_id" name="employee_id" placeholder="Enter ID" />
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter Name" required />
+
+      <label for="position">Position:</label>
+      <input type="text" id="position" name="position" placeholder="Enter Position" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" placeholder="Enter Age" required />
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" placeholder="Enter Address" required />
+
+      <label for="branch">Branch:</label>
+      <input type="text" id="branch" name="branch" placeholder="Enter Branch" required />
+
       <button type="submit">Submit</button>
     </form>
   </div>
