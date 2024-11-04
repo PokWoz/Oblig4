@@ -87,7 +87,30 @@ def delete_customer(customerID):  # delete customer by ID
 
 def order_car(customer_id, car_id):
     with driver.session() as session:
-        # Check if the car is available
+        # code for cheking if a customer has booked or rented another car
+        check_booking_query = """
+            MATCH (c:Customer {customerID: $customer_id})-[r:BOOKED]->(car:Car)
+            RETURN COUNT(r) AS count
+        """
+        booking_count_result = session.run(
+            check_booking_query, customer_id=customer_id)
+        booking_count = booking_count_result.single(
+        )['count']
+
+        if booking_count > 0:
+            return "Customer cannot rent a car while they have a booked car."
+
+        check_rent_query = """
+            MATCH (c:Customer {customerID: $customer_id})-[r:RENTS]->(car:Car)
+            RETURN COUNT(r) AS count
+        """
+        rent_count_result = session.run(
+            check_rent_query, customer_id=customer_id)
+        rent_count = rent_count_result.single()['count']
+
+        if rent_count > 0:
+            return "Customer cannot rent a car while they have a rented car."
+
         availability_query = """
             MATCH (car:Car {car_id: $car_id})
             RETURN car.status AS status
@@ -126,8 +149,20 @@ def order_car(customer_id, car_id):
 
 def transition_to_rent(customer_id, car_id):
     with driver.session() as session:
+        # code for checking if the customer is already renting another car
+        check_rent_query = """
+            MATCH (c:Customer {customerID: $customer_id})-[r:RENTS]->(car:Car)
+            RETURN COUNT(r) AS count
+        """
+        rent_count_result = session.run(
+            check_rent_query, customer_id=customer_id)
 
-        # Step 1: Delete the BOOKED relationship
+        rent_count = rent_count_result.single()['count']
+
+        if rent_count > 0:
+            return "Customer cannot rent a car while they have a rented car."
+
+        # delete booked relation
         delete_booked_relationship_query = """
             MATCH (c:Customer {customerID: $customer_id})-[r:BOOKED]->(car:Car {car_id: $car_id})
             DELETE r
@@ -135,14 +170,14 @@ def transition_to_rent(customer_id, car_id):
         session.run(delete_booked_relationship_query,
                     customer_id=customer_id, car_id=car_id)
 
-        # Step 2: Create the RENTS relationship between the customer and car
+        # create rents relation
         create_rents_relationship_query = """
             MATCH (c:Customer {customerID: $customer_id}), (car:Car {car_id: $car_id})
             CREATE (c)-[:RENTS]->(car)
         """
         session.run(create_rents_relationship_query,
                     customer_id=customer_id, car_id=car_id)
-
+        # set status as rented
         update_status_query = """
             MATCH (car:Car {car_id: $car_id})
             SET car.status = 'Rented'
@@ -217,7 +252,7 @@ def DeleteCar(car_id):  # delete car by ID
     with driver.session() as session:
         query = (
             """
-            MATCH (c:Car {id: $car_id})
+            MATCH (c:Car {car_id: $car_id})
             DETACH DELETE c
             """
         )

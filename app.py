@@ -107,6 +107,8 @@ def ordersRoute():
 
     return render_template('order_manager.html')
 
+# route for renting the booked car
+
 
 @app.route('/rent_car', methods=['GET', 'POST'])
 def rent_car_route():
