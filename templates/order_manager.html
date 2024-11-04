@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Car</title>
+  </head>
+  <body>
+    <h1>Book a Car</h1>
+    <form action="/create_order" method="post">
+      <label for="customerID">Customer ID:</label>
+      <input
+        type="text"
+        id="customerID"
+        name="customerID"
+        required
+      /><br /><br />
+
+      <label for="car_id">Car ID:</label>
+      <input type="text" id="car_id" name="car_id" required /><br /><br />
+
+      <button type="submit">Book Car</button>
+    </form>
+  </body>
+</html>

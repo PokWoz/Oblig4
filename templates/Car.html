@@ -1,91 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Management</title>
-  <style>
-    /* Reset default margins and padding */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Management</title>
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Car Management</h1>
+      <form method="post" action="/Car">
+        <label for="action">Choose an action:</label>
+        <select name="action" id="action">
+          <option value="create">Create New Car</option>
+          <option value="update">Update Existing Car</option>
+          <option value="delete">Delete Car</option>
+        </select>
 
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #4e54c8, #8f94fb);
-      color: #fff;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .container {
-      text-align: center;
-      max-width: 600px;
-      padding: 30px;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    label, input, select, button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-    }
-
-    select, input {
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      font-size: 1rem;
-    }
-
-    button {
-      background-color: #6a70fa;
-      color: #fff;
-      font-weight: bold;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #4e54c8;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Car Management</h1>
-    <form method="post" action="/Car">
-      <label for="action">Choose an action:</label>
-      <select name="action" id="action">
-        <option value="create">Create New Car</option>
-        <option value="update">Update Existing Car</option>
-        <option value="delete">Delete Car</option>
-      </select>
-
-      <input type="text" name="car_id" placeholder="Car ID (required for update/delete)">
-      <input type="text" name="make" placeholder="Make (required for create)">
-      <input type="text" name="model" placeholder="Model (required for create)">
-      <input type="number" name="year" placeholder="Year (required for create)">
-      <input type="text" name="location" placeholder="Location (required for create)">
-      <input type="text" name="status" placeholder="Status (required for create)">
-      <input type="text" name="damage" placeholder="Damage (required for Update)">
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</body>
+        <input
+          type="text"
+          name="car_id"
+          placeholder="Car ID (required for update/delete)"
+        />
+        <input
+          type="text"
+          name="make"
+          placeholder="Make (required for create)"
+        />
+        <input
+          type="text"
+          name="model"
+          placeholder="Model (required for create)"
+        />
+        <input
+          type="number"
+          name="year"
+          placeholder="Year (required for create)"
+        />
+        <input
+          type="text"
+          name="location"
+          placeholder="Location (required for create)"
+        />
+        <input
+          type="text"
+          name="status"
+          placeholder="Status (required for create)"
+        />
+        <input
+          type="text"
+          name="damage"
+          placeholder="Damage (required for Update)"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>

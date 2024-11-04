@@ -3,48 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Management</title>
+    <title>Customer Management</title>
     <style></style>
   </head>
   <body>
     <div class="container">
-      <h2>Employee Management</h2>
-      <form method="post" action="/employee">
+      <h2>Customer Management</h2>
+      <form method="post" action="/customer">
         <label for="action">Choose an action:</label>
         <select name="action" id="action" required>
-          <option value="create">Create New Employee</option>
-          <option value="update">Update Existing Employee</option>
-          <option value="delete">Delete Employee</option>
+          <option value="create">Create New Customer</option>
+          <option value="update">Update Existing Customer</option>
+          <option value="delete">Delete Customer</option>
         </select>
 
         <div class="instructions">
           - For <strong>Create</strong>, fill in all fields.<br />
-          - For <strong>Update</strong>, provide Employee ID and other fields to
+          - For <strong>Update</strong>, provide Name and other fields to
           update.<br />
-          - For <strong>Delete</strong>, only Employee ID is required.
+          - For <strong>Delete</strong>, only Name is required.
         </div>
 
-        <label for="employee_id">Employee ID:</label>
-        <input
-          type="text"
-          id="employee_id"
-          name="employee_id"
-          placeholder="Enter ID"
-        />
-
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter Name" />
-
-        <label for="position">Position:</label>
         <input
           type="text"
-          id="position"
-          name="position"
-          placeholder="Enter Position"
+          id="name"
+          name="name"
+          placeholder="Enter Name"
+          required
         />
-
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" placeholder="Enter Age" />
 
         <label for="address">Address:</label>
         <input
@@ -60,6 +47,13 @@
           id="branch"
           name="branch"
           placeholder="Enter Branch"
+        />
+        <label for="customerID">Customer ID:</label>
+        <input
+          type="text"
+          id="customerID"
+          name="customerID"
+          placeholder="Enter customer ID"
         />
 
         <button type="submit">Submit</button>
