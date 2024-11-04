@@ -115,11 +115,8 @@ def rent_car_route():
     if request.method == 'POST':
         customer_id = request.form.get('customer_id')
         car_id = request.form.get('car_id')
-
-        # Call a helper function to handle the renting process
         transition_to_rent(customer_id, car_id)
         return redirect(url_for('success'))
-    # Return the result message (success or failure)
     return render_template('rent_car.html')
 
 
